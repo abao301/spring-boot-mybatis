@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.abao.module.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.abao.module.model.User" >
+    <id column="uid" property="uid" jdbcType="CHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="activated" property="activated" jdbcType="INTEGER" />
+    <result column="verifyCode" property="verifycode" jdbcType="VARCHAR" />
+    <result column="applyTime" property="applytime" jdbcType="TIMESTAMP" />
+    <result column="enabledTime" property="enabledtime" jdbcType="TIMESTAMP" />
+    <result column="vc_number" property="vcNumber" jdbcType="INTEGER" />
+    <result column="password_modify_time" property="passwordModifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uid, account, password, activated, verifyCode, applyTime, enabledTime, vc_number, 
+    password_modify_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where uid = #{uid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_user
+    where uid = #{uid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.abao.module.model.User" >
+    insert into t_user (uid, account, password, 
+      activated, verifyCode, applyTime, 
+      enabledTime, vc_number, password_modify_time
+      )
+    values (#{uid,jdbcType=CHAR}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{activated,jdbcType=INTEGER}, #{verifycode,jdbcType=VARCHAR}, #{applytime,jdbcType=TIMESTAMP}, 
+      #{enabledtime,jdbcType=TIMESTAMP}, #{vcNumber,jdbcType=INTEGER}, #{passwordModifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.abao.module.model.User" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="activated != null" >
+        activated,
+      </if>
+      <if test="verifycode != null" >
+        verifyCode,
+      </if>
+      <if test="applytime != null" >
+        applyTime,
+      </if>
+      <if test="enabledtime != null" >
+        enabledTime,
+      </if>
+      <if test="vcNumber != null" >
+        vc_number,
+      </if>
+      <if test="passwordModifyTime != null" >
+        password_modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=CHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="activated != null" >
+        #{activated,jdbcType=INTEGER},
+      </if>
+      <if test="verifycode != null" >
+        #{verifycode,jdbcType=VARCHAR},
+      </if>
+      <if test="applytime != null" >
+        #{applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabledtime != null" >
+        #{enabledtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcNumber != null" >
+        #{vcNumber,jdbcType=INTEGER},
+      </if>
+      <if test="passwordModifyTime != null" >
+        #{passwordModifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abao.module.model.User" >
+    update t_user
+    <set >
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="activated != null" >
+        activated = #{activated,jdbcType=INTEGER},
+      </if>
+      <if test="verifycode != null" >
+        verifyCode = #{verifycode,jdbcType=VARCHAR},
+      </if>
+      <if test="applytime != null" >
+        applyTime = #{applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabledtime != null" >
+        enabledTime = #{enabledtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcNumber != null" >
+        vc_number = #{vcNumber,jdbcType=INTEGER},
+      </if>
+      <if test="passwordModifyTime != null" >
+        password_modify_time = #{passwordModifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abao.module.model.User" >
+    update t_user
+    set account = #{account,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      activated = #{activated,jdbcType=INTEGER},
+      verifyCode = #{verifycode,jdbcType=VARCHAR},
+      applyTime = #{applytime,jdbcType=TIMESTAMP},
+      enabledTime = #{enabledtime,jdbcType=TIMESTAMP},
+      vc_number = #{vcNumber,jdbcType=INTEGER},
+      password_modify_time = #{passwordModifyTime,jdbcType=TIMESTAMP}
+    where uid = #{uid,jdbcType=CHAR}
+  </update>
+
+  <select id="queryUserForList" resultMap="BaseResultMap">
+
+      select
+      <include refid="Base_Column_List" />
+      from  t_user
+  </select>
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+
+ 	<!-- 引入配置文件 -->  
+	<properties resource="application.properties"/>
+
+	<!-- 数据库驱动位置 需要指定 -->
+    <classPathEntry location="${jdbc.driverLocation}"/>
+    <context id="context1" >
+         <!-- 注释 -->  
+        <commentGenerator >  
+            <property name="suppressAllComments" value="true"/><!-- 是否取消注释  -->  
+            <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳  -->  
+        </commentGenerator> 
+  
+  		<!-- jdbc连接 -->  
+    <jdbcConnection driverClass="${spring.datasource.driver-class-name}" connectionURL="${spring.datasource.url}"
+    	userId="${spring.datasource.username}"  password="${spring.datasource.password}" />
+    
+     <!-- 生成java 实体类  targetPackage:类所放的位置 -->
+    <javaModelGenerator targetPackage="com.abao.module.model"  targetProject="src/main/java" />
+    
+    <!-- 生成sqlMap  targetPackage:sqlMap所放的位置 -->
+     <sqlMapGenerator targetPackage="com.abao.module.mapper" targetProject="src/main/java" />
+    
+		<!-- 生成 dao  targetPackage:dao所放的位置 -->
+     <javaClientGenerator targetPackage="com.abao.module.mapper" targetProject="src/main/java"  type="XMLMAPPER" />
+    
+    <!--  映射的表 需要修改 tableName 和  domainObjectName  -->
+    <table   tableName="t_user"  domainObjectName="User"   enableCountByExample="false"
+    			enableUpdateByExample="false"  enableDeleteByExample="false"  enableSelectByExample="false"  selectByExampleQueryId="false" />
+    			
+    			
+  </context>
+  
+</generatorConfiguration>
